@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe | Game</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div class="container game-container">
+    <div class="game-header">
+      <h1>Tic-Tac-Toe</h1>
+      <div class="room-info">
+        <span>Room ID: <strong id="room-id"><%= roomId %></strong></span>
+        <button id="copy-room-id" class="btn btn-small">Copy</button>
+      </div>
+    </div>
+    
+    <div id="waiting-screen" class="waiting-screen">
+      <div class="loader"></div>
+      <p>Waiting for another player to join...</p>
+    </div>
+    
+    <div id="game-area" class="hidden">
+      <div class="game-status">
+        <div id="player-info">
+          <div id="player-x" class="player">
+            <span class="player-symbol">X</span>
+            <span id="player-x-name" class="player-name">Player X</span>
+            <span class="player-status" id="player-x-status"></span>
+          </div>
+          <div id="player-o" class="player">
+            <span class="player-symbol">O</span>
+            <span id="player-o-name" class="player-name">Player O</span>
+            <span class="player-status" id="player-o-status"></span>
+          </div>
+        </div>
+        <div id="game-message" class="game-message"></div>
+      </div>
+      
+      <div id="board" class="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
+      
+      <div class="game-controls">
+        <button id="restart-btn" class="btn">Restart Game</button>
+        <a href="/" class="btn btn-secondary">New Game</a>
+      </div>
+    </div>
+    
+    <div id="room-full-message" class="error-message hidden">
+      <p>This room is already full. Please create a new game or join another room.</p>
+      <a href="/" class="btn">Back to Home</a>
+    </div>
+    
+    <div id="disconnect-message" class="error-message hidden">
+      <p>The other player has disconnected.</p>
+      <div class="game-controls">
+        <a href="/" class="btn">Back to Home</a>
+        <button id="wait-btn" class="btn btn-secondary">Wait for New Player</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Get room ID and player name from URL
+    const roomId = '<%= roomId %>';
+    const urlParams = new URLSearchParams(window.location.search);
+    const playerName = urlParams.get('name') || 'Guest';
+    
+    // Initialize the socket connection and other variables in the game.js file
+  </script>
+  <script src="/js/game.js"></script>
+</body>
+</html>
