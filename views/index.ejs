@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe | Home</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Multiplayer Tic-Tac-Toe</h1>
+
+      <div class="form-container">
+        <div class="form-section">
+          <h2>Create New Game</h2>
+          <form id="create-game-form">
+            <div class="form-group">
+              <label for="new-name">Your Name:</label>
+              <input type="text" id="new-name" required />
+            </div>
+            <button type="submit" class="btn">Create Game</button>
+          </form>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-section">
+          <h2>Join Existing Game</h2>
+          <form id="join-game-form">
+            <div class="form-group">
+              <label for="existing-room">Room ID:</label>
+              <input type="text" id="existing-room" required />
+            </div>
+            <div class="form-group">
+              <label for="join-name">Your Name:</label>
+              <input type="text" id="join-name" required />
+            </div>
+            <button type="submit" class="btn">Join Game</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Handle room creation
+      document
+        .getElementById("create-game-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const playerName = document.getElementById("new-name").value.trim();
+          if (playerName) {
+            // Generate random room ID
+            const roomId = Math.random().toString(36).substring(2, 8);
+            window.location.href = `/game/${roomId}?name=${encodeURIComponent(
+              playerName
+            )}`;
+          }
+        });
+
+      // Handle joining existing room
+      document
+        .getElementById("join-game-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const roomId = document.getElementById("existing-room").value.trim();
+          const playerName = document.getElementById("join-name").value.trim();
+          if (roomId && playerName) {
+            window.location.href = `/game/${roomId}?name=${encodeURIComponent(
+              playerName
+            )}`;
+          }
+        });
+    </script>
+  </body>
+</html>
